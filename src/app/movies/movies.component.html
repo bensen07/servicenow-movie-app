@@ -1,0 +1,55 @@
+<div class="panel panel-primary">
+  <p class="panel-heading">
+    Top Movies
+  </p>
+  <div class="panel-body">
+    <div *ngIf="movies && movies.length >0" class="row">
+
+      <div [chart]="chart"></div>
+
+      <div style="float: right;">
+        <div style="width:100%;">
+          <div class="input-group" style="width:300px;">
+
+            <input type="text" [(ngModel)]='ratingFilter' class="form-control" placeholder="Search by movie rating" style="float: left;">
+            <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" (click)="applyFilter(ratingFilter)">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </span>
+          </div>
+        </div>
+      </div>
+
+      <span class="input-group-btn">
+          <button class="btn btn-default" value="Sort By Rating" type="button" (click)="applySort('rating')">
+              <i class="fa fa-sort" aria-hidden="true"><span>Rating</span></i>
+          </button>
+          <button class="btn btn-default" value="Sort By Release Date" type="button" (click)="applySort('releaseDate')">
+                  <i class="fa fa-sort" aria-hidden="true"><span>Release Date</span></i>
+              </button>
+          <button class="btn btn-default" value="Clear Filter" type="button" (click)="applyFilter(null)">
+              <i class="fa fa-delete" aria-hidden="true"><span>Clear Filters</span></i>
+          </button>
+      </span>
+
+      <div *ngFor="let movie of movies| movieFilter :ratingFilter | sort: sortField; let i = index" class="col-md-4">
+        <p>
+          <a [routerLink]="['/movies', movie.$id]"><img [src]="movie.image" [title]="movie.title" class="img-responsive img-rounded"/></a>
+        </p>
+        <p class="text-left">{{movie.title | uppercase }}</p>
+        <p class="text-left">
+          <span *ngIf="movie.releaseDate && movie.releaseDate!=''; else notYetRatedBlock">{{movie.releaseDate}}</span>
+          <ng-template #notYetRatedBlock>
+            <span><b>Not Yet Released</b></span>
+          </ng-template>
+        </p>
+        <p class="text-left">
+          <span *ngIf="!(movie.rating)|| (movie.rating)=='' || (movie.rating)=='0'">Not Yet Rated</span>
+          <star-rating [score]="movie.rating" [forDisplay]="movie.releaseDate && movie.releaseDate!=''?false:true" (rateChanged)="onRateChange($event)"></star-rating>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>

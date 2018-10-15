@@ -2,6 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.5.
 
+## Install Bootstrap and Jquery
+
+Run `npm install bootstrap@3 jquery --save`
+
+## Install font-awesome to get star rating
+Run `npm install font-awesome --save`
+
+## Install Angular Highcharts
+Run `npm i --save angular-highcharts highcharts`
+Run `npm i --save-dev @types/highcharts`
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

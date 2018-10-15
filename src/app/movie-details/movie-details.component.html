@@ -1,0 +1,26 @@
+<div class="panel panel-primary">
+  <div *ngIf="movie" class="panel-heading">
+
+    <h2>{{movie.title | uppercase}}</h2>
+    <h3>
+        <span *ngIf="!(movie.rating)|| (movie.rating)=='' || (movie.rating)=='0'">Not Yet Rated</span>
+        <star-rating [score]="movie.rating" [forDisplay]="movie.releaseDate && movie.releaseDate!=''?false:true" (rateChanged)="onRateChange($event)"></star-rating>
+      </h3>
+    <h3>
+        <span *ngIf="movie.releaseDate && movie.releaseDate!=''; else notYetRatedBlock">{{movie.releaseDate}}</span>
+        <ng-template #notYetRatedBlock>
+          <span><b>Not Yet Released</b></span>
+        </ng-template>
+      </h3>
+
+  </div>
+  <div class="panel-body">
+    <div class="col-lg-2">
+      <img [src]="movie.image" [title]="movie.title" class="img-responsive img-rounded"/>
+    </div>
+      <div class="col-lg-2">
+        <p>{{movie.description}}</p>
+      </div>
+    </div>
+    <button (click)="goBack()">Back</button>
+  </div>

@@ -1,0 +1,14 @@
+<div class="star-container">
+  <div class="star-section">
+    <div class="star-block">
+      <span class='star-rating'>
+        <ng-container *ngIf='!forDisplay'>
+          <i *ngFor='let n of range; let $index = index;' class='fa to-rate' (click)='mark($index)' [ngClass]='isMarked($index)'></i>
+        </ng-container>
+        <ng-container *ngIf='forDisplay'>
+          <i *ngFor='let n of range; let $index = index;' class="to-display fa" [ngClass]='isMarked($index)'></i>
+        </ng-container>
+      </span>
+    </div>
+  </div>
+</div>
